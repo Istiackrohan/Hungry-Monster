@@ -10,9 +10,6 @@ async function callApi() {
   }
 callApi()
 
-// fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=all")
-// .then(res => res.json())
-// .then(data => displayFoodItem(data))
 function displayFoodItem(foods) {
 
     const foodsContainer = document.getElementById("foodContainer");
@@ -31,18 +28,16 @@ function displayFoodItem(foods) {
 }
 function searchFood() {
     const itemName = document.getElementById("search").value;
-    // fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${itemName}`)
-    //     .then(res => res.json())
-    //     .then(data => displaySearchResult(data.meals[0]));
+
 
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${itemName}`)
         .then(res => res.json())
         .then(data => displaySearchResult(data.meals[0]));
-    // displaySearchResult(data.meals[0])
+
     
 }
 function displaySearchResult(meal) {
-    console.log(meal)
+
     const { strMeal, strMealThumb } = meal;
     const foodCard = document.createElement('div');
     foodCard.className = "resultFood";
@@ -56,19 +51,7 @@ function displaySearchResult(meal) {
     foodsContainer.innerHTML = "";
     foodsContainer.appendChild(foodCard);
     const recipe = document.createElement('div');
-    // const keyName = Object.getOwnPropertyNames(meal);
-    // console.log(keyName)
-    // keyName.map(key=>{
-    //     if(key.startsWith("strIngredient")){
-    //         const itemName  = `
-    //             <li>${meal[key]}</li>
-    //         `
-    //         recipe.innerHTML=itemName;
-            
-            
-    //     }
-    //     foodCard.appendChild(recipe);
-    // })
+    
     for (var key in meal) {
         if (meal[key] !== null && meal[key] != "" && meal[key] != " " && meal[key] != null){
             foodShow = `
@@ -112,8 +95,6 @@ NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
     for(var i = this.length - 1; i >0; i--) {
         if(this[i].innerText == "" || this[i].innerText == "null null"){
             if(this[i] && this[i].parentElement) {
-                console.log(this[i].innerText == "")
-                console.log(this[i].parentElement)
                 this[i].parentElement.removeChild(this[i]);
             }
         }
